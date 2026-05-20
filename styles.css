@@ -1,0 +1,426 @@
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── VARIÁVEIS ── */
+:root {
+  --bg:         #08080b;
+  --text:       #f4f4f5;
+  --muted:      #a1a1aa;
+  --border:     rgba(255,255,255,0.09);
+  --glass:      rgba(255,255,255,0.055);
+  --glass-h:    rgba(255,255,255,0.10);
+  --accent:     #7c3aed;
+  --green:      rgba(22,163,74,0.18);
+  --green-b:    rgba(22,163,74,0.35);
+  --red:        rgba(220,38,38,0.18);
+  --red-b:      rgba(220,38,38,0.35);
+  --radius:     16px;
+  --ease:       0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── BASE ── */
+html, body {
+  height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ──────────────────────────────────────
+   LAYOUT PRINCIPAL  (dois painéis)
+────────────────────────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 56% 44%;
+  min-height: 100svh;     /* 100% da viewport */
+  overflow: hidden;
+  position: relative;
+}
+
+/* ──────────────────────────────────────
+   PAINEL ESQUERDO
+────────────────────────────────────── */
+.left {
+  z-index: 2;
+  padding: 48px 22px 40px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+
+/* ── PERFIL ── */
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.name {
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.handle {
+  color: var(--accent);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.verified {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1d9bf0;
+  color: #fff;
+  font-size: 0.55rem;
+  font-weight: 900;
+  vertical-align: middle;
+  margin-left: 3px;
+  position: relative;
+  top: -1px;
+}
+
+.ig-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-top: 2px;
+  transition: color var(--ease);
+}
+
+.ig-link::before {
+  content: '';
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.ig-link:hover {
+  color: var(--text);
+}
+
+.bio {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+/* ── BOTÕES COM ARTE ── */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  transition: transform var(--ease), box-shadow var(--ease);
+  height: 72px;
+  background: var(--surface);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.6);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+/* Imagem de fundo do botão */
+.btn__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform var(--ease), filter var(--ease);
+  filter: brightness(0.65);
+}
+
+.btn:hover .btn__bg {
+  transform: scale(1.05);
+  filter: brightness(0.80);
+}
+
+/* Overlay escuro com texto */
+.btn__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.55) 0%,
+    rgba(0,0,0,0.15) 70%,
+    transparent 100%
+  );
+}
+
+/* ícone/emoji wrapper — largura fixa para alinhar todos os labels */
+.btn__icon-wrap {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.7));
+}
+
+.btn__icon-wrap--svg {
+  width: 32px;
+  height: 28px;
+  filter: drop-shadow(0 1px 6px rgba(37,211,102,0.5));
+}
+
+/* logo personalizada (Análise) */
+.btn__logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 6px rgba(212,175,55,0.6)) brightness(1.1);
+}
+
+/* grupo esquerdo: ícone + textos */
+.btn__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  min-width: 0;
+  flex: 1;
+}
+
+.btn__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.btn__title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn__sub {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn__arrow {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-left: 8px;
+  opacity: 0.8;
+  transition: transform var(--ease), opacity var(--ease);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* ── BORDAS NEON ── */
+.btn--neon-purple {
+  border: 1.5px solid rgba(124, 58, 237, 0.8);
+  box-shadow:
+    0 0 8px rgba(124, 58, 237, 0.6),
+    0 0 22px rgba(34, 197, 94, 0.35),
+    inset 0 0 10px rgba(124, 58, 237, 0.08);
+}
+.btn--neon-purple:hover {
+  box-shadow:
+    0 0 14px rgba(124, 58, 237, 0.9),
+    0 0 36px rgba(34, 197, 94, 0.5),
+    0 10px 28px rgba(0,0,0,0.6);
+}
+
+.btn--neon-orange {
+  border: 1.5px solid rgba(251, 146, 60, 0.85);
+  box-shadow:
+    0 0 8px rgba(251, 146, 60, 0.65),
+    0 0 22px rgba(251, 146, 60, 0.3),
+    inset 0 0 10px rgba(251, 146, 60, 0.08);
+}
+.btn--neon-orange:hover {
+  box-shadow:
+    0 0 14px rgba(251, 146, 60, 0.95),
+    0 0 36px rgba(251, 146, 60, 0.5),
+    0 10px 28px rgba(0,0,0,0.6);
+}
+
+.btn--neon-green {
+  border: 1.5px solid rgba(34, 197, 94, 0.85);
+  box-shadow:
+    0 0 8px rgba(34, 197, 94, 0.65),
+    0 0 22px rgba(34, 197, 94, 0.3),
+    inset 0 0 10px rgba(34, 197, 94, 0.08);
+}
+.btn--neon-green:hover {
+  box-shadow:
+    0 0 14px rgba(34, 197, 94, 0.95),
+    0 0 36px rgba(34, 197, 94, 0.5),
+    0 10px 28px rgba(0,0,0,0.6);
+}
+
+/* ── BOTÃO YOUTUBE ── */
+.btn--youtube {
+  height: 72px;
+  border: 1.5px solid rgba(220, 38, 38, 0.7);
+  box-shadow:
+    0 0 8px rgba(220, 38, 38, 0.5),
+    0 0 22px rgba(220, 38, 38, 0.25);
+}
+.btn--youtube:hover {
+  box-shadow:
+    0 0 14px rgba(220, 38, 38, 0.85),
+    0 0 36px rgba(220, 38, 38, 0.45),
+    0 10px 28px rgba(0,0,0,0.6);
+}
+
+.btn__icon-wrap--yt {
+  font-size: 1.5rem;
+  color: #ff4444;
+  text-shadow: 0 0 12px rgba(255,68,68,0.8);
+  filter: drop-shadow(0 0 6px rgba(255,68,68,0.6));
+}
+
+/* ── RODAPÉ ── */
+.footer {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.footer a {
+  color: #a78bfa;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ──────────────────────────────────────
+   PAINEL DIREITO — FOTO COM FADE
+────────────────────────────────────── */
+.right {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+
+  /*
+    EFEITO DE FADE:
+    - Esquerda → transparente (funde com o fundo)
+    - Topo/fundo → leve escurecimento nas bordas
+    - Centro do corpo → 100% visível
+  */
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0,0,0,0.45) 22%,
+      black 48%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.55) 0%,
+      black 12%,
+      black 80%,
+      rgba(0,0,0,0.3) 100%
+    );
+  -webkit-mask-composite: source-in;
+
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0,0,0,0.45) 22%,
+      black 48%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.55) 0%,
+      black 12%,
+      black 80%,
+      rgba(0,0,0,0.3) 100%
+    );
+  mask-composite: intersect;
+}
+
+/* ──────────────────────────────────────
+   RESPONSIVO — TELAS MUITO ESTREITAS
+────────────────────────────────────── */
+@media (max-width: 340px) {
+  .layout {
+    grid-template-columns: 60% 40%;
+  }
+
+  .left {
+    padding: 32px 14px 32px 18px;
+    gap: 20px;
+  }
+
+  .btn {
+    padding: 11px 12px;
+    font-size: 0.8rem;
+  }
+
+  .btn__icon {
+    width: 20px;
+    font-size: 1rem;
+  }
+}

@@ -291,6 +291,22 @@ html, body {
   box-shadow: 0 0 14px rgba(220,38,38,0.85), 0 0 36px rgba(220,38,38,0.45), 0 10px 28px rgba(0,0,0,0.6);
 }
 
+.btn--telegram {
+  border: 1.5px solid rgba(34,158,217,0.85);
+  box-shadow: 0 0 8px rgba(34,158,217,0.65), 0 0 22px rgba(34,158,217,0.3), inset 0 0 10px rgba(34,158,217,0.08);
+}
+.btn--telegram:hover {
+  box-shadow: 0 0 14px rgba(34,158,217,0.95), 0 0 36px rgba(34,158,217,0.5), 0 10px 28px rgba(0,0,0,0.6);
+}
+
+.btn--instagram {
+  border: 1.5px solid rgba(220,39,67,0.75);
+  box-shadow: 0 0 8px rgba(220,39,67,0.55), 0 0 22px rgba(188,24,136,0.35), inset 0 0 10px rgba(240,148,51,0.08);
+}
+.btn--instagram:hover {
+  box-shadow: 0 0 14px rgba(220,39,67,0.9), 0 0 36px rgba(188,24,136,0.55), 0 10px 28px rgba(0,0,0,0.6);
+}
+
 .btn__icon-wrap--yt {
   font-size: 1.7rem;
   color: #ff4444;
